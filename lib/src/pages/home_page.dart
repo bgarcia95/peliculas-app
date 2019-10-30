@@ -21,7 +21,8 @@ class HomePage extends StatelessWidget {
       ),
       body: Container(
         child: Column(
-          children: <Widget>[_swiperTarjetas()],
+          mainAxisAlignment: MainAxisAlignment.spaceAround,
+          children: <Widget>[_swiperTarjetas(), _footer(context)],
         ),
       ),
     );
@@ -42,6 +43,32 @@ class HomePage extends StatelessWidget {
           );
         }
       },
+    );
+  }
+
+  Widget _footer(BuildContext context) {
+    return Container(
+      width: double.infinity,
+      child: Column(
+        children: <Widget>[
+          Text('Populares', style: Theme.of(context).textTheme.subhead),
+          FutureBuilder(
+            future: peliculasProvider.getPopulares(),
+            // initialData: InitialData,
+            builder: (BuildContext context, AsyncSnapshot<List> snapshot) {
+              snapshot.data?.forEach((p) => print(p.title) );
+              // if (snapshot.hasData) {
+              //   return Container(child: Text(snapshot.data.toString()));
+              // } else {
+              //   return Container(
+              //     child: Text('No data'),
+              //   );
+              // }
+              return Container();
+            },
+          ),
+        ],
+      ),
     );
   }
 }
