@@ -1,22 +1,17 @@
 class Peliculas {
-
   // Esta lista de peliculas  contendra todas las peliculas mapeadas por Peliculas.fromJsonMap
   List<Pelicula> items = new List();
 
   Peliculas();
 
   Peliculas.fromJsonList(List<dynamic> jsonList) {
-    if(jsonList == null) return;
+    if (jsonList == null) return;
 
-    for(var item in jsonList) {
+    for (var item in jsonList) {
       final pelicula = new Pelicula.fromJsonMap(item);
       items.add(pelicula);
     }
-
-
   }
-
-
 }
 
 class Pelicula {
@@ -53,7 +48,7 @@ class Pelicula {
   });
 
   Pelicula.fromJsonMap(Map<String, dynamic> json) {
-    popularity = json['popularity'] / 1 ;
+    popularity = json['popularity'] / 1;
     voteCount = json['vote_count'];
     video = json['video'];
     posterPath = json['poster_path'];
@@ -69,4 +64,3 @@ class Pelicula {
     releaseDate = json['release_date'];
   }
 }
-
