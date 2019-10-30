@@ -1,9 +1,10 @@
 import 'package:flutter/material.dart';
 
 import 'package:flutter_swiper/flutter_swiper.dart';
+import 'package:peliculas/src/models/pelicula_model.dart';
 
 class CardSwiper extends StatelessWidget {
-  final List<dynamic> peliculas;
+  final List<Pelicula> peliculas;
 
   CardSwiper({@required this.peliculas});
 
@@ -20,8 +21,9 @@ class CardSwiper extends StatelessWidget {
         itemBuilder: (BuildContext context, int index) {
           return ClipRRect(
             borderRadius: BorderRadius.circular(20.0),
-            child: Image.network(
-              "https://larepublica.pe/resizer/AE4Cl6n8InP7xuQeJXm0WZarunM=/1200x660/top/arc-anglerfish-arc2-prod-gruporepublica.s3.amazonaws.com/public/NWL5VBI4A5FKHDK7ML3QYDCH7U.jpg",
+            child: FadeInImage(
+              image: NetworkImage(peliculas[index].getPosterImg()),
+              placeholder: AssetImage('assets/img/no-image.jpg'),
               fit: BoxFit.cover,
             ),
           );
