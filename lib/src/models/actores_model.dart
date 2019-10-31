@@ -1,14 +1,14 @@
-class Actores {
+class Cast {
   // Esta lista de actores  contendra todas los actores mapeadas por Actores.fromJsonMap
   List<Actor> actores = new List();
 
-  Actores();
+  Cast();
 
-  Actores.fromJsonList(List<dynamic> jsonList) {
+  Cast.fromJsonList(List<dynamic> jsonList) {
     if (jsonList == null) return;
 
     jsonList.forEach((item) {
-      final actor = Actor.fromJsonMap(item)
+      final actor = Actor.fromJsonMap(item);
       actores.add(actor);
     });
 
