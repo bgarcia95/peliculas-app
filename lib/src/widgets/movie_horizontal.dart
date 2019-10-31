@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:peliculas/src/models/pelicula_model.dart';
-import 'package:peliculas/src/pages/pelicula_detalle.dart';
 
 class MovieHorizontal extends StatelessWidget {
   final List<Pelicula> peliculas;
@@ -22,7 +21,7 @@ class MovieHorizontal extends StatelessWidget {
       if (_pageController.position.pixels >=
           _pageController.position.maxScrollExtent - 200) {
         siguientePagina();
-      } 
+      }
     });
 
     return Container(
@@ -38,17 +37,20 @@ class MovieHorizontal extends StatelessWidget {
 
   // Creando una tarjeta individual (pelicula)
   Widget _tarjeta(BuildContext context, Pelicula pelicula) {
-    final tarjeta =  Container(
+    final tarjeta = Container(
       margin: EdgeInsets.only(right: 15.0),
       child: Column(
         children: <Widget>[
-          ClipRRect(
-            borderRadius: BorderRadius.circular(20.0),
-            child: FadeInImage(
-              image: NetworkImage(pelicula.getPosterImg()),
-              placeholder: AssetImage('assets/img/no-image.jpg'),
-              fit: BoxFit.cover,
-              height: 160.0,
+          Hero(
+            tag: pelicula.id,
+            child: ClipRRect(
+              borderRadius: BorderRadius.circular(20.0),
+              child: FadeInImage(
+                image: NetworkImage(pelicula.getPosterImg()),
+                placeholder: AssetImage('assets/img/no-image.jpg'),
+                fit: BoxFit.cover,
+                height: 160.0,
+              ),
             ),
           ),
           SizedBox(
@@ -64,41 +66,40 @@ class MovieHorizontal extends StatelessWidget {
     );
 
     return GestureDetector(
-      onTap: (){
+      onTap: () {
         Navigator.pushNamed(context, 'detalle_pelicula', arguments: pelicula);
       },
       child: tarjeta,
     );
-
   }
 
   // Creando la lista de tarjetas (peliculas)
-  List<Widget> _tarjetas(BuildContext context) {
-    return peliculas.map((pelicula) {
-      return Container(
-        margin: EdgeInsets.only(right: 15.0),
-        child: Column(
-          children: <Widget>[
-            ClipRRect(
-              borderRadius: BorderRadius.circular(20.0),
-              child: FadeInImage(
-                image: NetworkImage(pelicula.getPosterImg()),
-                placeholder: AssetImage('assets/img/no-image.jpg'),
-                fit: BoxFit.cover,
-                height: 160.0,
-              ),
-            ),
-            SizedBox(
-              height: 5.0,
-            ),
-            Text(
-              pelicula.title,
-              overflow: TextOverflow.ellipsis,
-              style: Theme.of(context).textTheme.caption,
-            ),
-          ],
-        ),
-      );
-    }).toList();
-  }
+  // List<Widget> _tarjetas(BuildContext context) {
+  //   return peliculas.map((pelicula) {
+  //     return Container(
+  //       margin: EdgeInsets.only(right: 15.0),
+  //       child: Column(
+  //         children: <Widget>[
+  //           ClipRRect(
+  //             borderRadius: BorderRadius.circular(20.0),
+  //             child: FadeInImage(
+  //               image: NetworkImage(pelicula.getPosterImg()),
+  //               placeholder: AssetImage('assets/img/no-image.jpg'),
+  //               fit: BoxFit.cover,
+  //               height: 160.0,
+  //             ),
+  //           ),
+  //           SizedBox(
+  //             height: 5.0,
+  //           ),
+  //           Text(
+  //             pelicula.title,
+  //             overflow: TextOverflow.ellipsis,
+  //             style: Theme.of(context).textTheme.caption,
+  //           ),
+  //         ],
+  //       ),
+  //     );
+  //   }).toList();
+  // }
 }
